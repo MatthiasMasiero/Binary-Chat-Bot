@@ -1,0 +1,41 @@
+{"intents": [
+    {"tag": "greetings",
+    "patterns": ["Hi", "How are you", "Is anyone there?", "Hello", "Good day"],
+    "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?"],
+    "context_set": ""
+    },
+
+    {"tag": "goodbye",
+    "patterns": ["Bye", "See you later", "Goodbye"],
+    "responses": ["See you later, thanks for visiting", "Have a nice day", "Bye! Come back again soon."],
+    "context_set": ""
+    },
+
+    {"tag": "bytes",
+    "patterns": ["What is a byte?", "What is a bit?", "What is a kilobyte?", "What is a megabyte?", "What is a gigabyte?", "What is a terabyte?", "What is a petabyte?", "What is a exabyte?", "What is a zettabyte?", "What is a yottabyte?"],
+    "responses": ["A byte is a unit of digital information that most commonly consists of eight bits. Historically, the byte was the number of bits used to encode a single character of text in a computer and for this reason it is the smallest addressable unit of memory in many computer architectures. The size of the byte has historically been hardware dependent and no definitive standards existed that mandated the size. The de facto standard of eight bits is a convenient power of two permitting the values 0 through 255 for one byte. The international standard IEC 80000-13 codified this common meaning. Many types of applications use information representable in eight or fewer bits and processor designers optimize for this common usage. The popularity of major commercial computing architectures has aided in the ubiquitous acceptance of the 8-bit size. Modern architectures typically use 32- or 64-bit words, built of four or eight bytes."],
+    "context_set": ""
+    },
+
+    {"tag": "binary",
+    "patterns": ["What is binary?", "What is binary code?", "What is binary language?", "What is binary number?", "What is binary system?", "What is binary digit?", "What is binary data?", "What is binary file?", "What is binary format?", "What is binary operation?", "What is binary search?"],
+    "responses": ["Binary code is a coding system using the binary digits 0 and 1 to represent a letter, digit, or other character in a computer or other electronic device. The binary number system is a base-2 number system. It uses only the digits 0 and 1. Computers operate in binary, meaning they store data and perform calculations using only zeros and ones. A binary digit, or bit, is the smallest unit of data in computing. It is represented by a 0 or a 1. Binary numbers are made up of binary digits (bits), eg the binary number 1001. The binary system is a numerical system that functions virtually identically to the decimal number system that people are likely more familiar with. While the decimal number system uses the number 10 as its base, the binary system uses 2. A binary file is a file whose content must be interpreted by a program or a hardware processor that understands in advance exactly how it is formatted. That is, the file is not in any externally identifiable format so that any program that wanted to could look for certain data at a certain place within the file. A binary file is a computer file that is not a text file. The term binary file is often used as a term meaning non-text file. Many binary file formats contain parts that can be interpreted as text; for example, some computer document files containing formatted text, such as older Microsoft Word document files, contain the text of the document but also contain formatting information in binary form."],
+    "context_set": ""
+    },
+
+    {"tag": "bit",
+    "patterns": ["What is a bit?", "What is a binary digit?", "What is a bit in computer?", "What is a bit in binary?", "What is a bit in binary code?", "What is a bit in binary language?", "What is a bit in binary number?", "What is a bit in binary system?", "What is a bit in binary data?", "What is a bit in binary file?", "What is a bit in binary format?", "What is a bit in binary operation?", "What is a bit in binary search?"],
+    "responses": ["A bit is the smallest unit of data in a computer. A bit has a single binary value, either 0 or 1. Although computers usually provide instructions that can test and manipulate bits, they generally are designed to store data and execute instructions in bit multiples called bytes. In most computer systems, there are eight bits in a byte. The value of a bit is usually stored as either above or below a designated level of electrical charge in a single capacitor within a memory device. Groups of bits that are stored in a computer system as a unit are called bytes. A bit (short for binary digit) is the smallest unit of data in a computer. A bit has a single binary value, either 0 or 1. Although computers usually provide instructions that can test and manipulate bits, they generally are designed to store data and execute instructions in bit multiples called bytes. In most computer systems, there are eight bits in a byte. The value of a bit is usually stored as either above or below a designated level of electrical charge in a single capacitor within a memory device. Groups of bits that are stored in a computer system as a unit are called bytes."],
+    "context_set": ""
+    },
+
+    {"tag": "kilobyte",
+    "patterns": ["What is a kilobyte?", "What is a kilobyte in computer?", "What is a kilobyte in binary?", "What is a kilobyte in binary code?", "What is a kilobyte in binary language?", "What is a kilobyte in binary number?", "What is a kilobyte in binary system?", "What is a kilobyte in binary data?", "What is a kilobyte in binary file?", "What is a kilobyte in binary format?", "What is a kilobyte in binary operation?", "What is a kilobyte in binary search?"],
+    "responses": ["The kilobyte is a multiple of the unit byte for digital information. The International System of Units (SI) defines the prefix kilo as 1000 (103); therefore one kilobyte is 1000 bytes. The unit symbol for the kilobyte is kB. In information technology, particularly in reference to main memory capacity, kilobyte is traditionally used to denote 1024 (210) bytes. This arises from the powers-of-two sizing common to such memory in digital circuitry. In this context, the symbols K and KB are often used when 1024 bytes is meant. In the International System of Units (SI), the prefix kilo means 1000 (103); therefore, one kilobyte is 1000 bytes. The unit symbol is kB. This is the definition recommended by the International Electrotechnical Commission (IEC). This definition, and related definitions of prefixes mega (1000000, 106), giga (1000000000, 109), etc., are used for data transfer rates in computer networks, internal bus, hard drive and flash media transfer speeds, and for the capacities of most storage media, particularly hard drives, flash-based storage, and DVDs. It is also consistent with the other uses of the SI prefixes in computing, such as CPU clock speeds or measures of performance. In this context, the symbols K and KB are often used when 1024 bytes is meant."],
+    "context_set": ""
+    }
+
+
+    
+]
+}
