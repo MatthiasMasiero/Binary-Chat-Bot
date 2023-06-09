@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quantum Chatbot</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    /* some flair for the site */
+body {
+  background-image: url('https://arizent.brightspotcdn.com/dims4/default/f033154/2147483647/strip/true/crop/3840x2160+0+0/resize/740x416!/quality/90/?url=https%3A%2F%2Fsource-media-brightspot.s3.amazonaws.com%2Fdb%2Fe7%2F6895b6114dd2ba424836ff88aee5%2Fadobestock-544067004.jpeg');
+  background-size: cover;
+  font-family: 'Roboto', sans-serif;
+  color: #000;
+}
+
+ #container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+} 
+
+#chatbox {
+  height: 300px;
+  width: 400px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 10px;
+  overflow-y: scroll;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px #800080;
+  position: relative;
+  z-index: 2;
+}
+
+#message {
+  width: 300px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: #000;
+  margin-right: 10px;
+  box-shadow: 0 0 10px #800080;
+  position: relative;
+  z-index: 2;
+}
+
+#send {
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: #000;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 0 10px #800080;
+  position: relative;
+  z-index: 2;
+}
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="chatbox"></div>
+    <div>
+      <input id="message" type="text">
+      <button id="send" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    class ChatBot {
+      constructor() {
+        // key words and their response output
+        this.keywordResponses = {
+            "hello": "Hi there!",
+            "hi": "Hey!",
+            "how are you": "I'm doing well, thanks for asking.",
+            "goodbye": "Goodbye!",
+            "what is quantum computing": "Quantum computing is the use of quantum mechanical phenomena such as superposition and entanglement to perform computation. These new computers could cause chaos with their ability to perform multiple calculations at once which could lead them to easily break the popular form of encryption RSA encryption. They could also bring positives like how they could speed up drug development, vaccine creation and even AI.",
+            "what are you": "I am a chatbot that can answer questions about quantum computing, would you like to learn some more?",
+            "yes": "Great! Heres the basic defintion of quantum computing. Quantum computing is the use of quantum mechanical phenomena such as superposition and entanglement to perform computation. These new computers could cause chaos with their ability to perform multiple calculations at once which could lead them to easily break the popular form of encryption RSA encryption. They could also bring positives like how they could speed up drug development, vaccine creation and even AI. If you want to learn more please go here: https://www.ibm.com/quantum-computing/learn/what-is-quantum-computing/",
+            "tell me more about superposition": "In quantum mechanics, superposition is a fundamental principle that holds that a physical system—such as an electron—can exist in multiple states at once. For example, in the case of a quantum computer, a qubit (quantum bit) can be both in a state of 0 and 1 simultaneously. It's only when we observe the qubit that it collapses into one of the possible states.",
+            "what is quantum entanglement": "Entanglement is a phenomenon in quantum mechanics where two particles become linked, and the state of one particle instantly affects the state of the other, no matter the distance between them. This phenomenon is fundamental for quantum computing, as it allows qubits that are entangled to work together, leading to a significant increase in processing power.",
+            "how does a quantum computer work": "Quantum computers perform calculations based on the probability of an object's state before it is measured, instead of just 1s or 0s, which means they have the potential to process exponentially more data compared to classical computers. They do this using qubits, which are the basic units of quantum information. Qubits, unlike classical bits, can be in both states at once due to a property called superposition. When qubits are entangled, the state of one qubit can depend on the state of another, which helps quantum computers solve complex problems more efficiently.",
+            "what can quantum computers do": "Quantum computers could potentially perform certain tasks much more efficiently than classical computers. For instance, they could potentially solve certain cryptographic problems much quicker, which could affect internet security. They could also help in the fields of machine learning and materials science, by handling complex computations to develop new materials or train AI more effectively. They're also being explored in finance for portfolio optimization, and in pharmaceuticals for drug discovery. However, as of my knowledge cutoff in September 2021, large-scale, reliable quantum computers are still a work in progress.",
+            "who are the leading researchers or companies in quantum computing": "Several companies and institutions are leading the way in quantum computing research and development. Some of these include IBM, Google's Quantum AI lab, Microsoft's Quantum Computing division, D-Wave Systems, Rigetti Computing, and several notable universities and research institutions around the world.",
+            "what is a qubit": "A qubit, or 'quantum bit', is the basic unit of quantum information. Unlike classical bits, which can be either a 0 or a 1, a qubit can be both at the same time, thanks to a property called superposition. This allows quantum computers to handle complex computations much more efficiently than classical computers.",
+            "explain quantum superposition": "Quantum superposition is a fundamental principle of quantum mechanics. It holds that any two (or more) quantum states can be added together, or 'superposed', and the result will be another valid quantum state. When we say a qubit is in 'superposition', we mean it is in a state that is a combination of both 0 and 1.",
+            "what is quantum tunneling": "Quantum tunneling is a quantum mechanical phenomenon where a particle passes through a potential barrier that it cannot surmount according to the principles of classical mechanics. It is a fundamental concept in quantum computing and enables certain operations that would be impossible or very slow on a classical computer.",
+            "what is quantum supremacy or quantum advantage": "Quantum supremacy, also called quantum advantage, is a potential future scenario when a quantum computer can perform a task that is practically impossible for a classical computer to do in a reasonable amount of time. Google announced in 2019 that they had achieved quantum supremacy, but as of my last update in 2021, this is still a topic of debate among experts in the field.",
+            "what are some challenges": "There are several challenges in developing quantum computers. These include maintaining 'quantum coherence', or the ability for qubits to stay in their superposition states, dealing with 'quantum decoherence' which is the loss of quantum coherence due to interaction with the environment, and error correction, since quantum states are very delicate and can easily be disturbed.",
+            "what is a quantum algorithm": "A quantum algorithm is a step-by-step procedure of quantum operations that can be performed on a quantum computer. These algorithms take advantage of the properties of quantum mechanics, particularly superposition and entanglement, to perform computations more efficiently than is possible on classical computers. Examples include Shor's algorithm for factorizing large numbers and Grover's algorithm for searching unsorted databases.",
+            "what is quantum annealing": "Quantum annealing is a method of solving optimization problems by using quantum fluctuations to 'tunnel' through energy barriers. It is used by D-Wave Systems in their quantum computers.",
+            "what is quantum cryptography": "Quantum cryptography is a method of encrypting data using quantum mechanics. It is theoretically impossible to break, since any attempt to measure the data would disturb it, and the sender and receiver would know that the data had been intercepted. However, as of my last update in 2021, it is still a work in progress.",
+            "what is quantum machine learning": "Quantum machine learning is a field that combines quantum computing and machine learning. It uses quantum algorithms to train machine learning models, and also uses machine learning to improve quantum algorithms. It is still a work in progress, but could potentially lead to more efficient machine learning models.",
+            "what is quantum artificial intelligence": "Quantum artificial intelligence is a field that combines quantum computing and artificial intelligence. It uses quantum algorithms to train AI models, and also uses AI to improve quantum algorithms. It is still a work in progress, but could potentially lead to more efficient AI models.",
+            "what is quantum chemistry": "Quantum chemistry is a field that combines quantum computing and chemistry. It uses quantum algorithms to simulate chemical reactions, and also uses chemistry to improve quantum algorithms. It is still a work in progress, but could potentially lead to more efficient chemical simulations.",
+            "what is quantum biology": "Quantum biology is a field that combines quantum computing and biology. It uses quantum algorithms to simulate biological processes, and also uses biology to improve quantum algorithms. It is still a work in progress, but could potentially lead to more efficient biological simulations.",
+            "what is quantum finance": "Quantum finance is a field that combines quantum computing and finance. It uses quantum algorithms to optimize portfolios, and also uses finance to improve quantum algorithms. It is still a work in progress, but could potentially lead to more efficient portfolio optimization.",
+            "what is quantum medicine": "Quantum medicine is a field that combines quantum computing and medicine. It uses quantum algorithms to simulate biological processes, and also uses medicine to improve quantum algorithms. It is still a work in progress, but could potentially lead to more efficient medical simulations.",
+            "what is quantum physics": "Quantum physics is a field that combines quantum computing and physics. It uses quantum algorithms to simulate physical processes, and also uses physics to improve quantum algorithms. It is still a work in progress, but could potentially lead to more efficient physical simulations.",
+            "why should we use quantum computers": "Quantum computers allow us to solve issues and certain computational tasks "
+        };
+      }
+
+      // This is what returns the response
+      getResponse(message) {
+        // Check if the message contains any keywords
+        for (const keyword in this.keywordResponses) {
+          if (message.toLowerCase().includes(keyword)) {
+            // If one of the keywords is found, return the response
+            return this.keywordResponses[keyword];
+          }
+        }
+
+        // If no keywords are found return this
+        return "I'm sorry, I didn't understand that.";
+      }
+    }
+
+    var chatbot = new ChatBot();
+    var chatbox = document.getElementById('chatbox');
+
+    // makes the function that sends the message to the bot
+    function sendMessage() {
+      var messageBox = document.getElementById('message');
+    // pulls message from the message box and clears it
+    
+    // takes the message and puts it in the chat log
+    var message = messageBox.value;
+      messageBox.value = '';
+
+      chatbox.innerHTML += '<div>You: ' + message + '</div>';
+
+    // gets the response from the bot and puts it in the chat log
+      var response = chatbot.getResponse(message);
+      chatbox.innerHTML += '<div>Quantum Chatter: ' + response + '</div>';
+    }
+  </script>
+</body>
+</html>
